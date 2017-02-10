@@ -13,7 +13,9 @@ app.get('/', function(req, res){
 });
 
 function callback() {
-  console.log('Listening on localhost + 3000 ');
+  console.log('Listening on localhost ' + port);
 };
 
-http.listen( 3000, callback );
+var port = process.env.PORT || 3000;
+
+http.listen( port, callback );
