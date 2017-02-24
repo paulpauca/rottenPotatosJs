@@ -11,6 +11,15 @@
   "author": "Paul Pauca",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.1"
+    "body-parser": "^1.16.1",
+    "chromedriver": "^2.27.3",
+    "cucumber": "^2.0.0-rc.7",
+    "ejs": "^2.5.6",
+    "express": "^4.14.1",
+    "mongodb": "^2.2.24",
+    "selenium-webdriver": "^3.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

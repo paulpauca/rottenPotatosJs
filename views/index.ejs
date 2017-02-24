@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rotten Potatos</title>
+</head>
+<body>
+  <h1>Rotten Potatos</h1>
+
+  <ul class="movies">
+  <% for(var i=0; i<movies.length; i++) {%>
+    <li class="movie">
+      <span><%= movies[i].title %></span>
+      <span>(<%= movies[i].rating %>)</span>
+    </li>
+  <% } %>
+  </ul>
+
+  <form action="/movies" method="POST">
+    <input type="text" placeholder="title" name="title">
+    <input type="text" placeholder="rating" name="rating">
+    <button type="submit">Submit</button>
+  </form>
+
+  <a href="/about">About</a>
+
+</body>
+</html>
