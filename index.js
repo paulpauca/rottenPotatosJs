@@ -7,7 +7,7 @@ var app = express();
 
 var http = require('http').Server(app);
 
-//app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'assets')));
 
 // urlencoded() extracts data from <form> and
 // add this data to the body element in the request object
