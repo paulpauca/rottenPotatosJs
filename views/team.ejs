@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rotten Potatos</title>
+</head>
+<body>
+  <h1>Rotten Potatos</h1>
+
+  <h2> The Team </h2>
+
+  <ul class="data">
+  <% for(var i=0; i<data.length; i++) {%>
+    <li class="person">
+      <span><%= data[i].name %></span>
+    </li>
+  <% } %>
+  </ul>
+
+  <a href="/about">About</a>
+
+</body>
+</html>

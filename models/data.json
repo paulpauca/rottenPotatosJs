@@ -1,0 +1,12 @@
+{
+  "name": "CSC 331-631 Team",
+  "participants": [
+      {"id": 0, "name": "Paul", "role": "instructor"},
+      {"id": 1, "name": "Peter", "role": "student"},
+      {"id": 2, "name": "Mary", "role": "student"},
+      {"id": 3, "name": "John", "role": "student"},
+      {"id": 4, "name": "Anna", "role": "student"},
+      {"id": 5, "name": "Sofia", "role": "student"}
+   ]
+}
+

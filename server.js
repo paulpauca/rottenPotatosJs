@@ -2,27 +2,40 @@ var express = require('express');
 var bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient
 var path = require('path');
+var modelTools = require('./models/dataTools.js');
 
+// Create the express object and pass it to the http server
 var app = express();
-
 var http = require('http').Server(app);
 
+// Set assets as a directory where pictures and such will be available
 app.use(express.static(path.join(__dirname,'assets')));
 
 // urlencoded() extracts data from <form> and
-// add this data to the body element in the request object
+// adds this data to the body element in the request object
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Set the view engine of the express app to ejs
 app.set('view engine', 'ejs');
 
+// Respond to GET request for target '/about'
 app.get('/about', (req, res) => {
   res.sendFile(__dirname + '/html/about.html');
 });
 
-// If the user targets '/' return the homepage
-app.get('/', function(req, res){
+// Respond to GET request for target '/team'
+var members;
+app.get('/team', (req, res) => { 
+  modelTools.readJsonFile('./models/data.json', (text) => { 
+    members = text; 
+    res.render('team.ejs', {data: members.participants}); 
+  });
 
+});
+
+
+// Respond to GET request for target '/' 
+app.get('/', function(req, res){
   // obtain data from movies into cursor object
   var cursor = db.collection('movies').find();
   // console.log(cursor);  // This has too much info
@@ -35,13 +48,11 @@ app.get('/', function(req, res){
     res.render('index.ejs', {movies: results});
   });
 
-  // Render views instead of sending a static file
-  //res.sendFile(__dirname + '/index.html');
-
   console.log('got GET / request');
 
 });
 
+// Respond to POST request for target '/movies'
 app.post('/movies', (req, res) => {
   console.log('got Post request');
   console.log(req.body);
@@ -53,13 +64,18 @@ app.post('/movies', (req, res) => {
   })
 } )
 
+// callback function for http.listen()
 function callback() {
   console.log('Listening on localhost ' + port);
 };
 var port = process.env.PORT || 3000;
-
+// db will be associated with the database when the connection to 
+// to MongoLab is established.
 var db;
 
+// Connect to MongoLab, when the connection is established then 
+// associate the MongoLab database with variable db and start listening
+// to HTML requests.
 MongoClient.connect('mongodb://pauca:wfu1soccer@ds011912.mlab.com:11912/rottenpotatos',
 (err, database) => {
   db = database;
