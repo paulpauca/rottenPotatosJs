@@ -8,22 +8,59 @@
   <h1>Rotten Potatos</h1>
 
   <ul class="movies">
-  <% for(var i=0; i<movies.length; i++) {%>
-    <li class="movie">
-      <span><%= movies[i].title %></span>
-      <span>(<%= movies[i].rating %>)</span>
-    </li>
-  <% } %>
-  </ul>
+    <% for(var i=0; i<movies.length; i++) {%>
+      <li class="movie">
+        <!-- show titles in readonly input elements. The id is generated with EJS -->
+        <form id="<%= 'form'+i %>" action="/update" method="post">
+            <span>
+              <input type="text" name="title" id="<%= 'title'+i %>" readonly value="<%= movies[i].title %>">
+        </span>
+        <span>(<%= movies[i].rating %>)</span>
+        <!-- generate the id for each button with EJS -->
+        <button type="button" id= <%= 'edit' + i %> onclick="edit(this)">Edit</button>
+      </form>
+      </li>
+      <% } %>
+    </ul>
 
-  <form action="/movies" method="POST">
-    <input type="text" placeholder="title" name="title">
-    <input type="text" placeholder="rating" name="rating">
-    <button type="submit">Submit</button>
-  </form>
+    <form action="/movies" method="POST">
+      <input type="text" placeholder="title" name="title">
+      <input type="text" placeholder="rating" name="rating">
+      <button type="submit">Submit</button>
+    </form>
 
-  <a href="/about">About</a>
-  <a href="/team">The Team</a>
+    <a href="/about">About</a>
+    <a href="/team">The Team</a>
 
-</body>
-</html>
+    <script>
+    // Respond to the edit button being clicked.
+    var content;
+    function edit(button) {
+      // get the number from the id, which should match the number in the id of the
+      // input element.
+      var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
+      var titleInput = document.getElementById('title'+rownum);
+
+      if (button.innerHTML == "done") {
+        titleInput.readOnly = true;
+        // if the content was edited then update the database
+        if (content != titleInput.value) {
+          var form = document.getElementById('form'+rownum);
+          form.submit();
+          console.log('submitted form');
+        }
+        titleInput.style.backgroundColor = "white";
+        button.innerHTML = "edit";
+      }
+      else {
+        // get the content of titleInput
+        content = titleInput.value;
+        // make this input element editable
+        titleInput.readOnly = false;
+        titleInput.style.backgroundColor="yellow";
+        button.innerHTML = "done";
+      }
+    }
+    </script>
+  </body>
+  </html>
