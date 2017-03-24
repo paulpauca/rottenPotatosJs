@@ -1,5 +1,8 @@
 # rottenPotatosJS
 
+# In Heroku
+rottenpotatoswfu.herokuapp.com
+
 ## Directories:
 - models: contains data files and code to read those files
 - html: contains static HTML files to serve to the client
@@ -8,7 +11,7 @@
 
 ## Questions:
 
-- How do I create a mockup database in the server?
+ How do I create a mockup database in the server?
 
    Answer: Look up the files in the models directory. You will need
    to figure out how to store your data as a JSON object which is then
@@ -17,7 +20,7 @@
    Look in server.js under // Respond to GET request for target '/team'
    to see how the data is read.
 
-- How do I render HTML files using EJS?
+2. How do I render HTML files using EJS?
    Answer: the ejs files stored in the views directory are templates
    that the Express view engine uses to render HTML code. 
    The syntax is easy to figure out. Visit http://ejs.co for details
